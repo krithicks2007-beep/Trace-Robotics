@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Home = ({ setActivePage }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [aboutSlide, setAboutSlide] = useState(0); // 0: About Us / Values, 1: Our Vision
 
   const slides = [
     {
@@ -21,7 +22,6 @@ const Home = ({ setActivePage }) => {
     }
   ];
 
-  // Auto-play every 4 seconds, resetting the timer when the slide changes
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
@@ -37,6 +37,18 @@ const Home = ({ setActivePage }) => {
     setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
   };
 
+  // Helper function to render the slide title with the last word highlighted in blue
+  const renderTitle = (title) => {
+    const words = title.split(' ');
+    if (words.length <= 1) return title;
+    const lastWord = words.pop();
+    return (
+      <>
+        {words.join(' ')} <span className="slide-title-highlight">{lastWord}</span>
+      </>
+    );
+  };
+
   return (
     <div className="fade-in-active">
       {/* Hero Slider Section */}
@@ -48,53 +60,18 @@ const Home = ({ setActivePage }) => {
                 key={index}
                 className={`slide-item ${index === currentSlide ? 'active' : ''}`}
               >
-                {/* Real image filling the slide */}
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    objectPosition: 'center',
-                    display: 'block'
-                  }}
+                  className="slide-img"
                 />
-                {/* Gradient overlay for text legibility */}
-                <div style={{
-                  position: 'absolute',
-                  inset: 0,
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.1) 50%, transparent 100%)'
-                }}></div>
+                {/* Gradient overlay */}
+                <div className="slide-overlay" />
                 {/* Slide Caption */}
-                <div style={{
-                  position: 'absolute',
-                  bottom: '70px',
-                  left: '48px',
-                  right: '48px',
-                  textAlign: 'left',
-                  color: '#FFFFFF',
-                  zIndex: 5
-                }}>
-                  <h1 style={{
-                    fontSize: '42px',
-                    fontWeight: '800',
-                    marginBottom: '8px',
-                    fontFamily: 'var(--font-heading)',
-                    textShadow: '0 2px 8px rgba(0,0,0,0.4)',
-                    letterSpacing: '-0.5px'
-                  }}>
-                    {slide.title}
-                  </h1>
-                  <p style={{
-                    fontSize: '17px',
-                    opacity: 0.9,
-                    maxWidth: '560px',
-                    lineHeight: '1.5',
-                    textShadow: '0 1px 4px rgba(0,0,0,0.3)'
-                  }}>
-                    {slide.subtitle}
-                  </p>
+                <div className="slide-caption">
+                  <h1 className="slide-title">{renderTitle(slide.title)}</h1>
+                  <p className="slide-subtitle">{slide.subtitle}</p>
+                  
                 </div>
               </div>
             ))}
@@ -102,10 +79,10 @@ const Home = ({ setActivePage }) => {
 
           {/* Slider controls */}
           <button className="slider-btn prev" onClick={handlePrev} aria-label="Previous Slide">
-            <i className="fa-solid fa-chevron-left"></i>
+            <i className="fa-solid fa-chevron-left" />
           </button>
           <button className="slider-btn next" onClick={handleNext} aria-label="Next Slide">
-            <i className="fa-solid fa-chevron-right"></i>
+            <i className="fa-solid fa-chevron-right" />
           </button>
 
           {/* Slider indicators */}
@@ -115,7 +92,9 @@ const Home = ({ setActivePage }) => {
                 key={index}
                 className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
                 onClick={() => setCurrentSlide(index)}
-              ></div>
+                role="button"
+                aria-label={`Go to slide ${index + 1}`}
+              />
             ))}
           </div>
         </div>
@@ -123,30 +102,82 @@ const Home = ({ setActivePage }) => {
 
       {/* About Us Section */}
       <section className="about-section">
-        <div className="section-pill-container">
-          <div className="section-pill center">About Us</div>
-        </div>
+        <div className="about-slider-container">
+          {/* Left Arrow */}
+          
 
-        <div className="about-text">
-          <p>
-            Trace Robotics is an automation and robotics company focused on solving real industrial problems through <span>intelligent engineering solutions</span>. We help manufacturing industries improve productivity, quality, safety, traceability, and operational efficiency by delivering practical automation systems tailored to their workflow.
-          </p>
-          <p>
-            Our expertise combines robotics, embedded systems, mechanical design, control systems, industrial software, and smart automation to build solutions that are reliable, scalable, and industry-ready. From concept to deployment, we work closely with industries to transform manual, repetitive, and inefficient processes into smarter automated operations.
-          </p>
-        </div>
+          {/* Slide Content */}
+          <div className="about-slide-content">
+            {aboutSlide === 0 ? (
+              <div className="about-slide-item fade-in-active">
+                <div className="section-pill-container center">
+                  <div className="section-pill">ABOUT US</div>
+                </div>
 
-        {/* Vision Card */}
-        <div className="vision-card">
-          <div className="vision-icon-box">
-            <i className="fa-solid fa-bolt"></i>
+                <h2 className="about-heading">
+                  Building Smarter Automation for a <span className="highlight-blue">Better Tomorrow</span>
+                </h2>
+
+                <p className="about-description">
+                  Trace Robotics is an automation and robotics company focused on solving real industrial problems through{' '}
+                  <span className="highlight-blue-bold">intelligent engineering solutions</span>. We help manufacturing industries improve productivity, quality, safety, traceability, and operational efficiency by delivering practical automation systems tailored to their workflow.
+                </p>
+
+                {/* Values Card Container */}
+                <div className="values-grid-container">
+                  <div className="value-card">
+                    <div className="value-icon-box">
+                      <i className="fa-solid fa-bullseye" />
+                    </div>
+                    <h4 className="value-title">Customer Focus</h4>
+                    <p className="value-desc">We build solutions that solve real problems and create lasting impact.</p>
+                  </div>
+                  <div className="value-card">
+                    <div className="value-icon-box">
+                      <i className="fa-solid fa-lightbulb" />
+                    </div>
+                    <h4 className="value-title">Innovation</h4>
+                    <p className="value-desc">We continuously explore new technologies to deliver future-ready solutions.</p>
+                  </div>
+                  <div className="value-card">
+                    <div className="value-icon-box">
+                      <i className="fa-solid fa-shield-halved" />
+                    </div>
+                    <h4 className="value-title">Quality & Reliability</h4>
+                    <p className="value-desc">We ensure the highest standards in engineering, testing, and deployment.</p>
+                  </div>
+                  <div className="value-card">
+                    <div className="value-icon-box">
+                      <i className="fa-solid fa-chart-simple" />
+                    </div>
+                    <h4 className="value-title">Integrity</h4>
+                    <p className="value-desc">We believe in transparent communication and long-term partnerships.</p>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="about-slide-item fade-in-active">
+                <div className="section-pill-container center">
+                  <div className="section-pill">OUR VISION</div>
+                </div>
+
+                <h2 className="about-heading">
+                  Enabling Smarter Factories, <span className="highlight-blue">Safer Workplaces</span>
+                </h2>
+
+                <div className="vision-slide-container">
+                  <div className="vision-icon-box-large">
+                    <i className="fa-solid fa-eye" />
+                  </div>
+                  <p className="vision-large-text">
+                    To become the most trusted automation partner for manufacturing industries in India and beyond — enabling smarter factories, safer workplaces, and more efficient operations.
+                  </p>
+                </div>
+              </div>
+            )}
           </div>
-          <div>
-            <h4 className="vision-title">Our Vision</h4>
-            <p className="vision-desc">
-              To become the most trusted automation partner for manufacturing industries in India and beyond — enabling smarter factories, safer workplaces, and more efficient operations.
-            </p>
-          </div>
+
+          
         </div>
       </section>
     </div>

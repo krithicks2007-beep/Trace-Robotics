@@ -10,13 +10,13 @@ const Header = ({ activePage, setActivePage }) => {
           <span className="logo-text">Trace Robotics</span>
         </div>
 
-        {/* Navigation Menubar */}
+        {/* Navigation Menubar (includes hamburger on mobile) */}
         <Menubar activePage={activePage} setActivePage={setActivePage} />
 
-        {/* Call to Actions & Session Controls */}
-        <div className="nav-actions">
-          <button 
-            className="btn-primary" 
+        {/* CTA Button — hidden on mobile (available inside drawer) */}
+        <div className="nav-actions desktop-cta">
+          <button
+            className="btn-primary"
             onClick={() => setActivePage('contact')}
           >
             Get in Touch

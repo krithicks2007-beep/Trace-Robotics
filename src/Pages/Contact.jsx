@@ -13,7 +13,6 @@ const Contact = () => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Opens default mail client pre-filled with the message
   const handleSubmit = (e) => {
     e.preventDefault();
     const subject = encodeURIComponent(`Inquiry from ${formData.name} — ${formData.interest || 'General'}`);
@@ -59,118 +58,47 @@ const Contact = () => {
   ];
 
   return (
-    <div className="fade-in-active" style={{ maxWidth: '1200px', margin: '60px auto', padding: '0 24px' }}>
+    <div className="fade-in-active contact-container">
 
       {/* Centered Pill and Title */}
-      <div style={{ marginBottom: '48px', textAlign: 'center' }}>
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
-          <div style={{
-            background: '#E5EFFF',
-            color: '#0066FF',
-            padding: '6px 20px',
-            borderRadius: '20px',
-            fontSize: '12px',
-            fontWeight: '700',
-            letterSpacing: '1px'
-          }}>
-            CONTACT
-          </div>
+      <div className="contact-header">
+        <div className="section-pill-container">
+          <div className="section-pill center">Contact</div>
         </div>
-        <h2 style={{
-          fontSize: '42px',
-          fontWeight: '800',
-          color: 'var(--text-dark)',
-          fontFamily: 'var(--font-heading)',
-          letterSpacing: '-0.5px'
-        }}>
-          Let's Build Something Amazing
-        </h2>
+        <h2 className="contact-title">Let's Build Something Amazing</h2>
       </div>
 
       {/* Grid: Left info cards — Right form */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: '48px', alignItems: 'start', textAlign: 'left' }}>
+      <div className="contact-layout">
 
         {/* Left: 4 Clickable Info Cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        <div className="contact-info-col">
           {infoItems.map((item, index) => (
             <a
               key={index}
               href={item.href}
               target={item.href.startsWith('http') ? '_blank' : '_self'}
               rel="noopener noreferrer"
-              style={{ textDecoration: 'none' }}
+              className="contact-info-card"
             >
               <div
-                style={{
-                  background: '#FFFFFF',
-                  border: '1px solid #E2E8F0',
-                  borderRadius: '16px',
-                  padding: '20px 24px',
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '20px',
-                  boxShadow: '0 4px 20px rgba(0, 102, 255, 0.02)',
-                  transition: 'all 0.25s ease',
-                  cursor: 'pointer'
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-3px)';
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 102, 255, 0.08)';
-                  e.currentTarget.style.borderColor = '#BFDBFE';
-                  const valSpan = e.currentTarget.querySelector('.contact-value-text');
-                  if (valSpan) valSpan.style.color = '#0066FF';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'none';
-                  e.currentTarget.style.boxShadow = '0 4px 20px rgba(0, 102, 255, 0.02)';
-                  e.currentTarget.style.borderColor = '#E2E8F0';
-                  const valSpan = e.currentTarget.querySelector('.contact-value-text');
-                  if (valSpan) valSpan.style.color = 'var(--text-dark)';
-                }}
+                className="contact-info-icon-box"
+                style={{ background: item.iconBg, color: item.iconColor }}
               >
-                {/* Rounded Icon */}
-                <div style={{
-                  width: '48px',
-                  height: '48px',
-                  borderRadius: '12px',
-                  background: item.iconBg,
-                  color: item.iconColor,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '18px',
-                  flexShrink: 0
-                }}>
-                  <i className={item.icon}></i>
-                </div>
-
-                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
-                  <span style={{ fontSize: '11px', fontWeight: '700', color: '#94A3B8', letterSpacing: '0.5px' }}>
-                    {item.label}
-                  </span>
-                  <span 
-                    className="contact-value-text"
-                    style={{
-                      fontSize: '15px',
-                      fontWeight: '700',
-                      color: 'var(--text-dark)',
-                      fontFamily: 'var(--font-heading)',
-                      transition: 'color 0.2s ease'
-                    }}
-                  >
-                    {item.value}
-                  </span>
-                </div>
+                <i className={item.icon} />
+              </div>
+              <div className="contact-info-text">
+                <span className="contact-info-label">{item.label}</span>
+                <span className="contact-info-value">{item.value}</span>
               </div>
             </a>
           ))}
         </div>
 
-        {/* Right: Contact Form (sends via mailto) */}
-        <div>
-          <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+        {/* Right: Contact Form */}
+        <div className="contact-form-col">
+          <form onSubmit={handleSubmit} className="contact-form">
 
-            {/* Name */}
             <input
               type="text"
               name="name"
@@ -178,22 +106,9 @@ const Contact = () => {
               value={formData.name}
               onChange={handleInputChange}
               placeholder="Your Name"
-              style={{
-                padding: '16px 20px',
-                borderRadius: '12px',
-                border: '1px solid #E2E8F0',
-                background: '#FFFFFF',
-                fontFamily: 'var(--font-body)',
-                fontSize: '14.5px',
-                color: 'var(--text-dark)',
-                outline: 'none',
-                transition: 'border-color 0.2s ease'
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#0066FF'}
-              onBlur={(e) => e.target.style.borderColor = '#E2E8F0'}
+              className="contact-input"
             />
 
-            {/* Email */}
             <input
               type="email"
               name="email"
@@ -201,44 +116,16 @@ const Contact = () => {
               value={formData.email}
               onChange={handleInputChange}
               placeholder="Your Email"
-              style={{
-                padding: '16px 20px',
-                borderRadius: '12px',
-                border: '1px solid #E2E8F0',
-                background: '#FFFFFF',
-                fontFamily: 'var(--font-body)',
-                fontSize: '14.5px',
-                color: 'var(--text-dark)',
-                outline: 'none',
-                transition: 'border-color 0.2s ease'
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#0066FF'}
-              onBlur={(e) => e.target.style.borderColor = '#E2E8F0'}
+              className="contact-input"
             />
 
-            {/* Interest Dropdown */}
-            <div style={{ position: 'relative' }}>
+            <div className="contact-select-wrapper">
               <select
                 name="interest"
                 required
                 value={formData.interest}
                 onChange={handleInputChange}
-                style={{
-                  width: '100%',
-                  padding: '16px 20px',
-                  borderRadius: '12px',
-                  border: '1px solid #E2E8F0',
-                  background: '#FFFFFF',
-                  fontFamily: 'var(--font-body)',
-                  fontSize: '14.5px',
-                  color: formData.interest ? 'var(--text-dark)' : '#94A3B8',
-                  outline: 'none',
-                  appearance: 'none',
-                  cursor: 'pointer',
-                  transition: 'border-color 0.2s ease'
-                }}
-                onFocus={(e) => e.target.style.borderColor = '#0066FF'}
-                onBlur={(e) => e.target.style.borderColor = '#E2E8F0'}
+                className="contact-input contact-select"
               >
                 <option value="" disabled hidden>What are you interested in?</option>
                 <option value="Autonomous Mobile Robots (AMR)">Autonomous Mobile Robots (AMR)</option>
@@ -248,15 +135,11 @@ const Contact = () => {
                 <option value="PLC Training">PLC Training</option>
                 <option value="Other Inquiry">Other Inquiry</option>
               </select>
-              <div style={{
-                position: 'absolute', right: '20px', top: '50%',
-                transform: 'translateY(-50%)', color: '#94A3B8', pointerEvents: 'none'
-              }}>
-                <i className="fa-solid fa-chevron-down" style={{ fontSize: '13px' }}></i>
+              <div className="contact-select-arrow">
+                <i className="fa-solid fa-chevron-down" />
               </div>
             </div>
 
-            {/* Requirements Textarea */}
             <textarea
               name="requirements"
               required
@@ -264,37 +147,12 @@ const Contact = () => {
               value={formData.requirements}
               onChange={handleInputChange}
               placeholder="Tell us about your requirements..."
-              style={{
-                padding: '16px 20px',
-                borderRadius: '12px',
-                border: '1px solid #E2E8F0',
-                background: '#FFFFFF',
-                fontFamily: 'var(--font-body)',
-                fontSize: '14.5px',
-                color: 'var(--text-dark)',
-                outline: 'none',
-                resize: 'none',
-                transition: 'border-color 0.2s ease'
-              }}
-              onFocus={(e) => e.target.style.borderColor = '#0066FF'}
-              onBlur={(e) => e.target.style.borderColor = '#E2E8F0'}
-            ></textarea>
+              className="contact-input contact-textarea"
+            />
 
-            {/* Send Message Button → triggers mailto */}
-            <button
-              type="submit"
-              className="btn-blue"
-              style={{
-                justifyContent: 'center',
-                alignItems: 'center',
-                width: '100%',
-                padding: '16px 24px',
-                fontSize: '15.5px',
-                borderRadius: '30px'
-              }}
-            >
+            <button type="submit" className="btn-blue contact-submit-btn">
               <span>Send Message</span>
-              <i className="fa-solid fa-paper-plane"></i>
+              <i className="fa-solid fa-paper-plane" />
             </button>
 
           </form>

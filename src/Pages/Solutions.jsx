@@ -23,17 +23,10 @@ const Solutions = ({ setActivePage }) => {
     <div className="fade-in-active split-page-layout">
       {/* Left Column: Real Image */}
       <div className="layout-media-side">
-        <div style={{
-          width: '100%',
-          aspectRatio: '4 / 3',
-          borderRadius: '24px',
-          overflow: 'hidden',
-          boxShadow: '0 20px 60px rgba(0, 102, 255, 0.08)'
-        }}>
+        <div>
           <img
             src="/robot1.jpg"
             alt="Autonomous Robotics Solutions"
-            style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
           />
         </div>
       </div>
