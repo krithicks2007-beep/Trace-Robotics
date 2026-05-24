@@ -78,15 +78,10 @@ function App() {
         <div id="home">
           <Home setActivePage={handleNavClick} />
         </div>
-        
-        {/* Separator Line */}
-        <div style={{ height: '1px', background: 'var(--border-light)', maxWidth: '1200px', margin: '0 auto' }}></div>
 
-        <div id="solutions">
+        <div id="solutions" className="solutions-section-wrapper">
           <Solutions setActivePage={handleNavClick} />
         </div>
-
-        <div style={{ height: '1px', background: 'var(--border-light)', maxWidth: '1200px', margin: '0 auto' }}></div>
 
         <div id="products">
           <Products setActivePage={handleNavClick} />

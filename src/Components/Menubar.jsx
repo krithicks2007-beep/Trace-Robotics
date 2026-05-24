@@ -20,6 +20,7 @@ const Menubar = ({ activePage, setActivePage }) => {
   // Close menu on outside click
   useEffect(() => {
     const handleClickOutside = (e) => {
+      if (e.target.closest('.hamburger-btn')) return;
       if (drawerRef.current && !drawerRef.current.contains(e.target)) {
         setIsOpen(false);
       }

@@ -6,26 +6,43 @@ const Home = ({ setActivePage }) => {
 
   const slides = [
     {
-      image: "/front1.jpg",
+      image: "/front1.jpg?v=10",
+      pill: "ROBOTICS LAB",
       title: "Trace Robotics Lab",
-      subtitle: "Pioneering intelligent automation and robotic systems"
+      subtitle: "Pioneering intelligent automation and robotic systems",
+      btnText: "Explore Solutions",
+      btnTarget: "solutions"
     },
     {
-      image: "/front2.jpg",
+      image: "/front2.png?v=10",
+      pill: "INTELLIGENT SYSTEMS",
       title: "Smart Factory Integration",
-      subtitle: "Connecting advanced sensors, AI, and industrial logic controllers"
+      subtitle: "Connecting advanced sensors, AI, and industrial logic controllers.",
+      btnText: "Explore Products",
+      btnTarget: "products"
     },
     {
-      image: "/front3.jpg",
+      image: "/front3.png?v=10",
+      pill: "AUTOMATION SOLUTIONS",
       title: "Autonomous Fleet Operations",
-      subtitle: "Streamlining logistics with cutting-edge mobile robots"
+      subtitle: "Streamlining logistics with cutting-edge mobile robots",
+      btnText: "Explore Solutions",
+      btnTarget: "solutions"
+    },
+    {
+      image: "/front44.png",
+      pill: "STARTER KIT",
+      title: "Mobile Robot Starter Kit",
+      subtitle: "Everything you need to build, learn, and innovate. Perfect for students and makers.",
+      btnText: "Explore Products",
+      btnTarget: "products"
     }
   ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 4000);
+    }, 4500);
     return () => clearInterval(timer);
   }, [currentSlide, slides.length]);
 
@@ -71,7 +88,6 @@ const Home = ({ setActivePage }) => {
                 <div className="slide-caption">
                   <h1 className="slide-title">{renderTitle(slide.title)}</h1>
                   <p className="slide-subtitle">{slide.subtitle}</p>
-                  
                 </div>
               </div>
             ))}
@@ -104,15 +120,13 @@ const Home = ({ setActivePage }) => {
       <section className="about-section">
         <div className="about-slider-container">
           {/* Left Arrow */}
-          
+
 
           {/* Slide Content */}
           <div className="about-slide-content">
             {aboutSlide === 0 ? (
               <div className="about-slide-item fade-in-active">
-                <div className="section-pill-container center">
-                  <div className="section-pill">ABOUT US</div>
-                </div>
+
 
                 <h2 className="about-heading">
                   Building Smarter Automation for a <span className="highlight-blue">Better Tomorrow</span>
@@ -125,33 +139,37 @@ const Home = ({ setActivePage }) => {
 
                 {/* Values Card Container */}
                 <div className="values-grid-container">
-                  <div className="value-card">
-                    <div className="value-icon-box">
+                  <div className="modern-card">
+                    <div className="card-icon-box-modern">
                       <i className="fa-solid fa-bullseye" />
                     </div>
-                    <h4 className="value-title">Customer Focus</h4>
-                    <p className="value-desc">We build solutions that solve real problems and create lasting impact.</p>
+                    <h4 className="card-title-modern">Customer Focus</h4>
+                    <div className="card-divider"></div>
+                    <p className="card-desc-modern">We build solutions that solve real problems and create lasting impact.</p>
                   </div>
-                  <div className="value-card">
-                    <div className="value-icon-box">
+                  <div className="modern-card">
+                    <div className="card-icon-box-modern">
                       <i className="fa-solid fa-lightbulb" />
                     </div>
-                    <h4 className="value-title">Innovation</h4>
-                    <p className="value-desc">We continuously explore new technologies to deliver future-ready solutions.</p>
+                    <h4 className="card-title-modern">Innovation</h4>
+                    <div className="card-divider"></div>
+                    <p className="card-desc-modern">We continuously explore new technologies to deliver future-ready solutions.</p>
                   </div>
-                  <div className="value-card">
-                    <div className="value-icon-box">
+                  <div className="modern-card">
+                    <div className="card-icon-box-modern">
                       <i className="fa-solid fa-shield-halved" />
                     </div>
-                    <h4 className="value-title">Quality & Reliability</h4>
-                    <p className="value-desc">We ensure the highest standards in engineering, testing, and deployment.</p>
+                    <h4 className="card-title-modern">Quality & Reliability</h4>
+                    <div className="card-divider"></div>
+                    <p className="card-desc-modern">We ensure the highest standards in engineering, testing, and deployment.</p>
                   </div>
-                  <div className="value-card">
-                    <div className="value-icon-box">
+                  <div className="modern-card">
+                    <div className="card-icon-box-modern">
                       <i className="fa-solid fa-chart-simple" />
                     </div>
-                    <h4 className="value-title">Integrity</h4>
-                    <p className="value-desc">We believe in transparent communication and long-term partnerships.</p>
+                    <h4 className="card-title-modern">Integrity</h4>
+                    <div className="card-divider"></div>
+                    <p className="card-desc-modern">We believe in transparent communication and long-term partnerships.</p>
                   </div>
                 </div>
               </div>
@@ -177,7 +195,7 @@ const Home = ({ setActivePage }) => {
             )}
           </div>
 
-          
+
         </div>
       </section>
     </div>
