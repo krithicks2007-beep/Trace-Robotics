@@ -3,19 +3,16 @@ import React from 'react';
 const Support = ({ setActivePage }) => {
   const cards = [
     {
-      icon: "fa-solid fa-chalkboard-user",
       title: "1. Robot Training",
       desc: "Hands-on industrial robot programming and operation training for your team.",
       image: "/Robot Training.png"
     },
     {
-      icon: "fa-solid fa-network-wired",
       title: "2. PLC Training",
       desc: "Practical PLC programming and automation control training for engineers.",
       image: "/PLC Training.png"
     },
     {
-      icon: "fa-solid fa-screwdriver-wrench",
       title: "3. Support & Maintenance",
       desc: "Reliable ongoing support, troubleshooting and preventive maintenance services.",
       image: "/support &maintenance.png"
@@ -39,15 +36,12 @@ const Support = ({ setActivePage }) => {
       <div className="feature-cards-grid support-cards-grid">
         {cards.map((card, index) => (
           <div className="modern-card" key={index}>
-            <div className="card-icon-box-modern">
-              <i className={card.icon}></i>
-            </div>
-            <h3 className="card-title-modern">{card.title}</h3>
-            <div className="card-divider"></div>
-            <p className="card-desc-modern">{card.desc}</p>
             {card.image && (
               <img src={card.image} alt={card.title} className="card-img-modern" />
             )}
+            <h3 className="card-title-modern">{card.title}</h3>
+            <div className="card-divider"></div>
+            <p className="card-desc-modern">{card.desc}</p>
             <div
               className="card-link-modern"
               onClick={() => setActivePage('contact')}

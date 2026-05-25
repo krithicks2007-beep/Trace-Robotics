@@ -37,8 +37,23 @@ const Menubar = ({ activePage, setActivePage }) => {
 
   // Prevent body scroll when drawer is open
   useEffect(() => {
+    const header = document.querySelector('.header-wrapper');
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
     document.body.style.overflow = isOpen ? 'hidden' : '';
-    return () => { document.body.style.overflow = ''; };
+    document.body.classList.toggle('mobile-menu-open', isOpen);
+
+    if (isOpen && headerHeight) {
+      document.body.style.setProperty('--mobile-header-height', `${headerHeight}px`);
+    } else {
+      document.body.style.removeProperty('--mobile-header-height');
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+      document.body.classList.remove('mobile-menu-open');
+      document.body.style.removeProperty('--mobile-header-height');
+    };
   }, [isOpen]);
 
   return (

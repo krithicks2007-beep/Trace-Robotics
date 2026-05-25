@@ -3,25 +3,21 @@ import React from 'react';
 const Products = ({ setActivePage }) => {
   const cards = [
     {
-      icon: "fa-solid fa-robot",
       title: "1. Industrial Robot Arms",
       desc: "High-precision robotic arms for welding, handling, assembling, and more.",
       image: "/Industrial Robot Arms.png"
     },
     {
-      icon: "fa-solid fa-truck-fast",
       title: "2. AMR / AGV Systems",
       desc: "Autonomous mobile robots for material transport and smart intralogistics.",
       image: "/AMR AGV Systems.png"
     },
     {
-      icon: "fa-solid fa-microchip",
       title: "3. Control & Drive Systems",
       desc: "Advanced control solutions for seamless motion and process control.",
       image: "/Control and Driven System.png"
     },
     {
-      icon: "fa-solid fa-camera",
       title: "4. Vision Systems",
       desc: "Intelligent vision solutions for inspection, guidance, and quality assurance.",
       image: "/vision system.png"
@@ -29,7 +25,7 @@ const Products = ({ setActivePage }) => {
   ];
 
   return (
-    <div className="fade-in-active full-page-grid-layout">
+    <div className="fade-in-active full-page-grid-layout products-page-section">
       <div className="grid-section-header">
         <div className="section-pill-container center">
           <div className="section-pill">OUR PRODUCTS</div>
@@ -45,15 +41,12 @@ const Products = ({ setActivePage }) => {
       <div className="feature-cards-grid">
         {cards.map((card, index) => (
           <div className="modern-card" key={index}>
-            <div className="card-icon-box-modern">
-              <i className={card.icon}></i>
-            </div>
-            <h3 className="card-title-modern">{card.title}</h3>
-            <div className="card-divider"></div>
-            <p className="card-desc-modern">{card.desc}</p>
             {card.image && (
               <img src={card.image} alt={card.title} className="card-img-modern" />
             )}
+            <h3 className="card-title-modern">{card.title}</h3>
+            <div className="card-divider"></div>
+            <p className="card-desc-modern">{card.desc}</p>
             <div 
               className="card-link-modern"
               onClick={() => setActivePage('contact')}

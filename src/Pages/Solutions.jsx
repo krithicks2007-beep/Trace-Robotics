@@ -3,25 +3,21 @@ import React from 'react';
 const Solutions = ({ setActivePage }) => {
   const cards = [
     {
-      icon: "fa-solid fa-industry",
       title: "1. Manufacturing Automation",
       desc: "End-to-end automation solutions to optimize manufacturing processes and increase output.",
       image: "/Manufacturing Automation.png"
     },
     {
-      icon: "fa-solid fa-box",
       title: "2. Intralogistics Automation",
       desc: "Smart material handling solutions for warehouses and distribution centers.",
       image: "/Intralogistics Automation.png"
     },
     {
-      icon: "fa-solid fa-magnifying-glass",
       title: "3. Quality Inspection",
       desc: "AI-powered vision inspection systems to ensure consistent quality and reduce defects.",
       image: "/Quality Inspection.png"
     },
     {
-      icon: "fa-solid fa-wrench",
       title: "4. Turnkey Solutions",
       desc: "From concept to deployment, we deliver complete turnkey automation solutions.",
       image: "/Turnkey Solutions.png"
@@ -45,15 +41,12 @@ const Solutions = ({ setActivePage }) => {
       <div className="feature-cards-grid">
         {cards.map((card, index) => (
           <div className="modern-card" key={index}>
-            <div className="card-icon-box-modern">
-              <i className={card.icon}></i>
-            </div>
-            <h3 className="card-title-modern">{card.title}</h3>
-            <div className="card-divider"></div>
-            <p className="card-desc-modern">{card.desc}</p>
             {card.image && (
               <img src={card.image} alt={card.title} className="card-img-modern" />
             )}
+            <h3 className="card-title-modern">{card.title}</h3>
+            <div className="card-divider"></div>
+            <p className="card-desc-modern">{card.desc}</p>
             <div 
               className="card-link-modern"
               onClick={() => setActivePage('contact')}
