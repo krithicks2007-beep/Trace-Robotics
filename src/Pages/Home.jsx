@@ -1,10 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import aiRoboticsImage from '../../pic/AI robotics.png';
-import industrialAutomationImage from '../../pic/INDUSTRIAL AUTOMATION.png';
-import industryFourImage from '../../pic/INDUSTRY 4.0.png';
-
+import React, { useState, useEffect, useRef } from 'react';
 const Home = ({ setActivePage }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const homeRef = useRef(null);
 
   const slides = [
     {
@@ -43,7 +40,6 @@ const Home = ({ setActivePage }) => {
 
   const focusCards = [
     {
-      image: aiRoboticsImage,
       title: "AI & ROBOTICS",
       desc: "Intelligent robots and AI-driven solutions designed to automate complex tasks, enhance accuracy, and adapt to dynamic environments.",
       icon: "fa-solid fa-robot",
@@ -54,7 +50,6 @@ const Home = ({ setActivePage }) => {
       ]
     },
     {
-      image: industrialAutomationImage,
       title: "INDUSTRIAL AUTOMATION",
       desc: "End-to-end automation solutions that improve productivity, reduce downtime, and ensure consistent quality across processes.",
       icon: "fa-solid fa-gears",
@@ -65,7 +60,6 @@ const Home = ({ setActivePage }) => {
       ]
     },
     {
-      image: industryFourImage,
       title: "INDUSTRY 4.0",
       desc: "Smart, connected, and data-driven solutions that turn real-time data into actionable insights for a more efficient and future-ready factory.",
       icon: "fa-solid fa-industry",
@@ -73,6 +67,16 @@ const Home = ({ setActivePage }) => {
         { icon: "fa-solid fa-cloud", label: "IIoT & Connectivity" },
         { icon: "fa-solid fa-chart-line", label: "Data Analytics & Dashboards" },
         { icon: "fa-solid fa-shield-halved", label: "Predictive Maintenance" }
+      ]
+    },
+    {
+      title: "ENGINEERING SOLUTIONS",
+      desc: "End-to-end engineering solutions across mechanical, electronics, and software to bring your ideas to life from concept to deployment.",
+      icon: "fa-solid fa-code",
+      features: [
+        { icon: "fa-solid fa-cube", label: "Mechanical CAD Design" },
+        { icon: "fa-solid fa-microchip", label: "Embedded Board Development" },
+        { icon: "fa-solid fa-code", label: "Software Development" }
       ]
     }
   ];
@@ -84,6 +88,42 @@ const Home = ({ setActivePage }) => {
     return () => clearInterval(timer);
   }, [currentSlide, slides.length]);
 
+  useEffect(() => {
+    const root = homeRef.current;
+    if (!root) return;
+
+    const revealItems = root.querySelectorAll('.js-reveal, .js-section-pop');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' }
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+
+    const handlePointerMove = (event) => {
+      const { innerWidth, innerHeight } = window;
+      const x = (event.clientX / innerWidth - 0.5).toFixed(3);
+      const y = (event.clientY / innerHeight - 0.5).toFixed(3);
+
+      root.style.setProperty('--motion-x', x);
+      root.style.setProperty('--motion-y', y);
+    };
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('pointermove', handlePointerMove);
+    };
+  }, []);
+
   const handlePrev = () => {
     setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
@@ -93,6 +133,10 @@ const Home = ({ setActivePage }) => {
   };
 
   const renderTitle = (title) => {
+    if (title === 'Trace Robotics Lab') {
+      return <span className="slide-title-highlight">{title}</span>;
+    }
+
     const words = title.split(' ');
     if (words.length <= 1) return title;
     const lastWord = words.pop();
@@ -104,8 +148,8 @@ const Home = ({ setActivePage }) => {
   };
 
   return (
-    <div className="fade-in-active">
-      <section className="hero-slider-section">
+    <div className="fade-in-active home-page" ref={homeRef}>
+      <section className="hero-slider-section js-section-pop">
         <div className="slider-wrapper">
           <div className="slider-track">
             {slides.map((slide, index) => (
@@ -116,7 +160,7 @@ const Home = ({ setActivePage }) => {
                 <img
                   src={slide.image}
                   alt={slide.title}
-                  className="slide-img"
+                  className="slide-img hero-motion-img"
                 />
                 <div className="slide-overlay" />
                 <div className="slide-caption">
@@ -148,9 +192,9 @@ const Home = ({ setActivePage }) => {
         </div>
       </section>
 
-      <section className="about-section">
+      <section className="about-section js-section-pop">
         <div className="about-focus-container">
-          <div className="about-focus-header">
+          <div className="about-focus-header js-reveal">
             <div className="about-eyebrow">
               <span></span>
               WHAT WE FOCUS ON
@@ -160,17 +204,18 @@ const Home = ({ setActivePage }) => {
               Smart Solutions. <span>Intelligent Future.</span>
             </h2>
             <p className="about-focus-subtitle">
-              At Trace Robotics, we focus on three core areas that drive <strong>innovation</strong>,
+              At Trace Robotics, we focus on four core areas that drive <strong>innovation</strong>,
               <strong> efficiency</strong>, and <strong> transformation</strong> for modern industries.
             </p>
           </div>
 
           <div className="about-focus-grid">
-            {focusCards.map((card) => (
-              <article className="focus-card" key={card.title}>
-                <div className="focus-card-image-wrap">
-                  <img src={card.image} alt={card.title} className="focus-card-image" />
-                </div>
+            {focusCards.map((card, index) => (
+              <article
+                className="focus-card js-reveal"
+                key={card.title}
+                style={{ transitionDelay: `${index * 90}ms` }}
+              >
                 <div className="focus-card-icon">
                   <i className={card.icon}></i>
                 </div>
@@ -191,7 +236,7 @@ const Home = ({ setActivePage }) => {
             ))}
           </div>
 
-          <div className="about-focus-footer">
+          <div className="about-focus-footer js-reveal">
             <div className="about-footer-brand">
               <span className="about-footer-mark">TR</span>
               <span>TRACE<br />ROBOTICS</span>
