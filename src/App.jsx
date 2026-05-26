@@ -9,12 +9,13 @@ import Support from './Pages/Support';
 import Contact from './Pages/Contact';
 import './App.css';
 
-const routePages = ['solutions', 'products', 'support'];
+const routePages = ['solutions', 'products', 'support', 'contact'];
 const pageRoutes = {
   home: '/',
   solutions: '/solutions',
   products: '/products',
-  support: '/support'
+  support: '/support',
+  contact: '/contact'
 };
 
 const getPageFromPath = () => {
@@ -185,6 +186,19 @@ function App() {
           </div>
           <div id="support">
             <Support setActivePage={handleNavClick} />
+          </div>
+        </>
+      );
+    }
+
+    if (currentPage === 'contact') {
+      return (
+        <>
+          <div id="home">
+            <HeroSlider />
+          </div>
+          <div id="contact">
+            <Contact />
           </div>
         </>
       );

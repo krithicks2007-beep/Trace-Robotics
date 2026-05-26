@@ -16,6 +16,11 @@ const Support = ({ setActivePage }) => {
       title: "3. Support & Maintenance",
       desc: "Reliable ongoing support, troubleshooting and preventive maintenance services.",
       image: "/support &maintenance.png"
+    },
+    {
+      title: "4. Embedded System Training",
+      desc: "Practical embedded programming and hardware interfacing training for engineers and developers.",
+      image: "/Embedded system training.jpg"
     }
   ];
 

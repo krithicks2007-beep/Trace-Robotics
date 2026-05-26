@@ -1502,6 +1502,10 @@ body.mobile-menu-open .header-wrapper {
   justify-items: center;
 }
 
+.support-cards-grid>.modern-card {
+  width: 100%;
+}
+
 @media (min-width: 640px) {
   .support-cards-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -1516,12 +1520,22 @@ body.mobile-menu-open .header-wrapper {
 
 @media (min-width: 1024px) {
   .support-cards-grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 18px;
   }
 
   .support-cards-grid>.modern-card:last-child:nth-child(odd) {
     max-width: 100%;
     grid-column: auto;
+  }
+
+  .support-cards-grid>.modern-card {
+    padding: 18px;
+  }
+
+  .support-cards-grid .card-img-modern {
+    height: 140px;
+    margin-bottom: 16px;
   }
 }
 
