@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Header from './Components/Header';
 import Footer from './Components/Footer';
+import HeroSlider from './Components/HeroSlider';
 import Home from './Pages/Home';
 import Solutions from './Pages/Solutions';
 import Products from './Pages/Products';
@@ -76,20 +77,24 @@ function App() {
       {/* Main Single-Page Scroll Content */}
       <main className="main-content">
         <div id="home">
+          <HeroSlider />
           <Home setActivePage={handleNavClick} />
         </div>
 
         <div id="solutions" className="solutions-section-wrapper">
+          <HeroSlider />
           <Solutions setActivePage={handleNavClick} />
         </div>
 
         <div id="products">
+          <HeroSlider />
           <Products setActivePage={handleNavClick} />
         </div>
 
         <div style={{ height: '1px', background: 'var(--border-light)', maxWidth: '1200px', margin: '0 auto' }}></div>
 
         <div id="support">
+          <HeroSlider />
           <Support setActivePage={handleNavClick} />
         </div>
 

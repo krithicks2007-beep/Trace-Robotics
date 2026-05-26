@@ -1,42 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-const Home = ({ setActivePage }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const homeRef = useRef(null);
+import { useEffect, useRef } from 'react';
 
-  const slides = [
-    {
-      image: "/front1.jpg?v=10",
-      pill: "ROBOTICS LAB",
-      title: "Trace Robotics Lab",
-      subtitle: "Pioneering intelligent automation and robotic systems",
-      btnText: "Explore Solutions",
-      btnTarget: "solutions"
-    },
-    {
-      image: "/front2.png?v=10",
-      pill: "INTELLIGENT SYSTEMS",
-      title: "Smart Factory Integration",
-      subtitle: "Connecting advanced sensors, AI, and industrial logic controllers.",
-      btnText: "Explore Products",
-      btnTarget: "products"
-    },
-    {
-      image: "/front3.png?v=10",
-      pill: "AUTOMATION SOLUTIONS",
-      title: "Autonomous Fleet Operations",
-      subtitle: "Streamlining logistics with cutting-edge mobile robots",
-      btnText: "Explore Solutions",
-      btnTarget: "solutions"
-    },
-    {
-      image: "/front44.png",
-      pill: "STARTER KIT",
-      title: "Mobile Robot Starter Kit",
-      subtitle: "Everything you need to build, learn, and innovate. Perfect for students and makers.",
-      btnText: "Explore Products",
-      btnTarget: "products"
-    }
-  ];
+const Home = ({ setActivePage }) => {
+  const homeRef = useRef(null);
 
   const focusCards = [
     {
@@ -82,13 +47,6 @@ const Home = ({ setActivePage }) => {
   ];
 
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 4500);
-    return () => clearInterval(timer);
-  }, [currentSlide, slides.length]);
-
-  useEffect(() => {
     const root = homeRef.current;
     if (!root) return;
 
@@ -107,91 +65,13 @@ const Home = ({ setActivePage }) => {
 
     revealItems.forEach((item) => observer.observe(item));
 
-    const handlePointerMove = (event) => {
-      const { innerWidth, innerHeight } = window;
-      const x = (event.clientX / innerWidth - 0.5).toFixed(3);
-      const y = (event.clientY / innerHeight - 0.5).toFixed(3);
-
-      root.style.setProperty('--motion-x', x);
-      root.style.setProperty('--motion-y', y);
-    };
-
-    window.addEventListener('pointermove', handlePointerMove, { passive: true });
-
     return () => {
       observer.disconnect();
-      window.removeEventListener('pointermove', handlePointerMove);
     };
   }, []);
 
-  const handlePrev = () => {
-    setCurrentSlide((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
-  };
-
-  const handleNext = () => {
-    setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-  };
-
-  const renderTitle = (title) => {
-    if (title === 'Trace Robotics Lab') {
-      return <span className="slide-title-highlight">{title}</span>;
-    }
-
-    const words = title.split(' ');
-    if (words.length <= 1) return title;
-    const lastWord = words.pop();
-    return (
-      <>
-        {words.join(' ')} <span className="slide-title-highlight">{lastWord}</span>
-      </>
-    );
-  };
-
   return (
     <div className="fade-in-active home-page" ref={homeRef}>
-      <section className="hero-slider-section js-section-pop">
-        <div className="slider-wrapper">
-          <div className="slider-track">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`slide-item ${index === currentSlide ? 'active' : ''}`}
-              >
-                <img
-                  src={slide.image}
-                  alt={slide.title}
-                  className="slide-img hero-motion-img"
-                />
-                <div className="slide-overlay" />
-                <div className="slide-caption">
-                  <h1 className="slide-title">{renderTitle(slide.title)}</h1>
-                  <p className="slide-subtitle">{slide.subtitle}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <button className="slider-btn prev" onClick={handlePrev} aria-label="Previous Slide">
-            <i className="fa-solid fa-chevron-left" />
-          </button>
-          <button className="slider-btn next" onClick={handleNext} aria-label="Next Slide">
-            <i className="fa-solid fa-chevron-right" />
-          </button>
-
-          <div className="slider-dots">
-            {slides.map((_, index) => (
-              <div
-                key={index}
-                className={`slider-dot ${index === currentSlide ? 'active' : ''}`}
-                onClick={() => setCurrentSlide(index)}
-                role="button"
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section className="about-section js-section-pop">
         <div className="about-focus-container">
           <div className="about-focus-header js-reveal">

@@ -128,8 +128,8 @@ const Contact = () => {
                 className="contact-input contact-select"
               >
                 <option value="" disabled hidden>What are you interested in?</option>
-                <option value="Autonomous Mobile Robots (AMR)">Autonomous Mobile Robots (AMR)</option>
-                <option value="Custom Industrial Automation">Custom Industrial Automation</option>
+                <option value="Industry ---- AMR & Automation">Industry ---- AMR & Automation</option>
+                <option value="Support ---- workspace & Courses">Support ---- workspace & Courses</option>
                 <option value="AI & Sensor Integration">AI & Sensor Integration</option>
                 <option value="Robot Training">Robot Training</option>
                 <option value="PLC Training">PLC Training</option>
