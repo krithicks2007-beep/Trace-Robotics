@@ -9,12 +9,40 @@ import Support from './Pages/Support';
 import Contact from './Pages/Contact';
 import './App.css';
 
+const routePages = ['solutions', 'products', 'support'];
+const pageRoutes = {
+  home: '/',
+  solutions: '/solutions',
+  products: '/products',
+  support: '/support'
+};
+
+const getPageFromPath = () => {
+  const path = window.location.pathname.replace(/\/$/, '') || '/';
+  return Object.entries(pageRoutes).find(([, route]) => route === path)?.[0] || 'home';
+};
+
 function App() {
-  const [activePage, setActivePage] = useState('home');
+  const initialPage = getPageFromPath();
+  const [currentPage, setCurrentPage] = useState(initialPage);
+  const [activePage, setActivePage] = useState(initialPage);
+  const [pendingScrollTarget, setPendingScrollTarget] = useState(null);
+
+  const navigateToRoute = (id) => {
+    const nextPath = pageRoutes[id] || '/';
+    if (window.location.pathname !== nextPath) {
+      window.history.pushState({}, '', nextPath);
+    }
+    setActivePage(id);
+    setCurrentPage(id);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
 
   // Smooth scroll helper with header offset to prevent overlap
-  const handleNavClick = (id) => {
-    setActivePage(id);
+  const scrollToSection = (id) => {
     if (id === 'home') {
       window.scrollTo({
         top: 0,
@@ -22,6 +50,7 @@ function App() {
       });
       return;
     }
+
     const element = document.getElementById(id);
     if (element) {
       const header = document.querySelector('.header-wrapper');
@@ -34,8 +63,60 @@ function App() {
     }
   };
 
+  const handleNavClick = (id) => {
+    if (routePages.includes(id) || id === 'home') {
+      navigateToRoute(id);
+      return;
+    }
+
+    if (currentPage !== 'home') {
+      if (window.location.pathname !== pageRoutes.home) {
+        window.history.pushState({}, '', pageRoutes.home);
+      }
+      setCurrentPage('home');
+      setActivePage(id);
+      setPendingScrollTarget(id);
+      return;
+    }
+
+    setActivePage(id);
+    scrollToSection(id);
+  };
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const page = getPageFromPath();
+      setCurrentPage(page);
+      setActivePage(page);
+      window.scrollTo({ top: 0 });
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!pendingScrollTarget || currentPage !== 'home') return;
+
+    const frameId = window.requestAnimationFrame(() => {
+      scrollToSection(pendingScrollTarget);
+      setPendingScrollTarget(null);
+    });
+
+    return () => {
+      window.cancelAnimationFrame(frameId);
+    };
+  }, [currentPage, pendingScrollTarget]);
+
   // Intersection Observer to highlight navbar links on scroll
   useEffect(() => {
+    if (currentPage !== 'home') {
+      return;
+    }
+
     const sections = ['home', 'solutions', 'products', 'support', 'contact'];
     
     const observerOptions = {
@@ -64,37 +145,69 @@ function App() {
     return () => {
       observer.disconnect();
     };
-  }, []);
+  }, [currentPage]);
 
   const whatsappNumber = "7010776537";
   const whatsappUrl = `https://wa.me/91${whatsappNumber}`;
 
-  return (
-    <div className="app-container">
-      {/* Dynamic Header with Scroll actions */}
-      <Header activePage={activePage} setActivePage={handleNavClick} />
+  const renderMainContent = () => {
+    if (currentPage === 'solutions') {
+      return (
+        <>
+          <div id="home">
+            <HeroSlider />
+          </div>
+          <div id="solutions" className="solutions-section-wrapper">
+            <Solutions setActivePage={handleNavClick} />
+          </div>
+        </>
+      );
+    }
 
-      {/* Main Single-Page Scroll Content */}
-      <main className="main-content">
+    if (currentPage === 'products') {
+      return (
+        <>
+          <div id="home">
+            <HeroSlider />
+          </div>
+          <div id="products">
+            <Products setActivePage={handleNavClick} />
+          </div>
+        </>
+      );
+    }
+
+    if (currentPage === 'support') {
+      return (
+        <>
+          <div id="home">
+            <HeroSlider />
+          </div>
+          <div id="support">
+            <Support setActivePage={handleNavClick} />
+          </div>
+        </>
+      );
+    }
+
+    return (
+      <>
         <div id="home">
           <HeroSlider />
           <Home setActivePage={handleNavClick} />
         </div>
 
         <div id="solutions" className="solutions-section-wrapper">
-          <HeroSlider />
           <Solutions setActivePage={handleNavClick} />
         </div>
 
         <div id="products">
-          <HeroSlider />
           <Products setActivePage={handleNavClick} />
         </div>
 
         <div style={{ height: '1px', background: 'var(--border-light)', maxWidth: '1200px', margin: '0 auto' }}></div>
 
         <div id="support">
-          <HeroSlider />
           <Support setActivePage={handleNavClick} />
         </div>
 
@@ -103,6 +216,18 @@ function App() {
         <div id="contact">
           <Contact />
         </div>
+      </>
+    );
+  };
+
+  return (
+    <div className="app-container">
+      {/* Dynamic Header with Scroll actions */}
+      <Header activePage={activePage} setActivePage={handleNavClick} />
+
+      {/* Main Content */}
+      <main className="main-content">
+        {renderMainContent()}
       </main>
 
       {/* Persistent Floating WhatsApp widget */}

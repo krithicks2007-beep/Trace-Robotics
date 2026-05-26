@@ -2,17 +2,17 @@ import { useEffect, useRef, useState } from 'react';
 
 const slides = [
   {
-    image: "/front1.jpg?v=10",
+    image: "/front1.jpg?v=11",
     title: "Trace Robotics Lab",
     subtitle: "Pioneering intelligent automation and robotic systems"
   },
   {
-    image: "/front2.png?v=10",
+    image: "/front2.png?v=11",
     title: "Smart Factory Integration",
     subtitle: "Connecting advanced sensors, AI, and industrial logic controllers."
   },
   {
-    image: "/front3.png?v=10",
+    image: "/front3.png?v=11",
     title: "Autonomous Fleet Operations",
     subtitle: "Streamlining logistics with cutting-edge mobile robots"
   },
