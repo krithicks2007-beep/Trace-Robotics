@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const Menubar = ({ activePage, setActivePage }) => {
   const [isOpen, setIsOpen] = useState(false);

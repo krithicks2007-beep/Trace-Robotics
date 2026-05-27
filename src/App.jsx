@@ -4,6 +4,7 @@ import Footer from './Components/Footer';
 import HeroSlider from './Components/HeroSlider';
 import Home from './Pages/Home';
 import Solutions from './Pages/Solutions';
+import Solution2 from './Pages/Solution2';
 import Products from './Pages/Products';
 import Product2 from './Pages/Product2';
 import Support from './Pages/Support';
@@ -159,8 +160,8 @@ function App() {
           <div id="home">
             <HeroSlider />
           </div>
-          <div id="solutions" className="solutions-section-wrapper">
-            <Solutions setActivePage={handleNavClick} />
+          <div id="solutions">
+            <Solution2 />
           </div>
         </>
       );

@@ -19,7 +19,14 @@ const slides = [
   {
     image: "/front44.png",
     title: "Mobile Robot Starter Kit",
-    subtitle: "Everything you need to build, learn, and innovate. Perfect for students and makers."
+    subtitle: "Everything you need to build, learn, and innovate. Perfect for students, educators, and makers ready to bring ideas to life.",
+    variant: "starter-kit",
+    features: [
+      { icon: "fa-solid fa-robot", label: "Easy to Build" },
+      { icon: "fa-solid fa-code", label: "Programmable" },
+      { icon: "fa-solid fa-battery-full", label: "Rechargeable" },
+      { icon: "fa-solid fa-wifi", label: "Expandable" }
+    ]
   }
 ];
 
@@ -85,18 +92,41 @@ const HeroSlider = () => {
           {slides.map((slide, index) => (
             <div
               key={index}
-              className={`slide-item ${index === currentSlide ? 'active' : ''}`}
+              className={`slide-item ${slide.variant === 'starter-kit' ? 'starter-kit-slide' : ''} ${index === currentSlide ? 'active' : ''}`}
             >
               <img
                 src={slide.image}
                 alt={slide.title}
                 className="slide-img hero-motion-img"
               />
-              <div className="slide-overlay" />
-              <div className="slide-caption">
-                <h1 className="slide-title">{renderTitle(slide.title)}</h1>
-                <p className="slide-subtitle">{slide.subtitle}</p>
-              </div>
+              {slide.variant === 'starter-kit' ? (
+                <div className="starter-hero-content">
+                  <div className="starter-hero-copy">
+                    <h1 className="starter-hero-title">
+                      Mobile Robot <span>Starter Kit.</span>
+                    </h1>
+                    <p className="starter-hero-subtitle">{slide.subtitle}</p>
+                  </div>
+                  <div className="starter-hero-features">
+                    {slide.features.map((feature) => (
+                      <div className="starter-hero-feature" key={feature.label}>
+                        <div className="starter-hero-icon">
+                          <i className={feature.icon}></i>
+                        </div>
+                        <span>{feature.label}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <div className="slide-overlay" />
+                  <div className="slide-caption">
+                    <h1 className="slide-title">{renderTitle(slide.title)}</h1>
+                    <p className="slide-subtitle">{slide.subtitle}</p>
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </div>

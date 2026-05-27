@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Footer = ({ setActivePage }) => {
   const currentYear = new Date().getFullYear();
 
@@ -12,7 +10,8 @@ const Footer = ({ setActivePage }) => {
 
   const quickLinks = [
     { label: "Home", target: "home" },
-    { label: "Industry", target: "solutions" },
+    { label: "solution", target: "solutions" },
+    { label: "product" , target:"products"},
     { label: "Support", target: "support" },
     { label: "Contact", target: "contact" }
   ];
@@ -34,11 +33,11 @@ const Footer = ({ setActivePage }) => {
   return (
     <footer className="footer-wrapper">
       <div className="footer-container">
-
-        {/* Column 1: Brand & Socials */}
         <div className="footer-brand-col">
           <div className="footer-logo-row">
-            <span className="footer-hex-icon">⬡</span>
+            <span className="footer-hex-icon">
+              <i className="fa-regular fa-hexagon"></i>
+            </span>
             <span className="footer-logo-text">
               Trace <span className="footer-logo-blue">Robotics</span>
             </span>
@@ -62,7 +61,6 @@ const Footer = ({ setActivePage }) => {
           </div>
         </div>
 
-        {/* Column 2: Quick Links */}
         <div className="footer-column">
           <h4 className="footer-col-heading">Quick Links</h4>
           <ul className="footer-link-list">
@@ -78,7 +76,6 @@ const Footer = ({ setActivePage }) => {
           </ul>
         </div>
 
-        {/* Column 3: Policies */}
         <div className="footer-column">
           <h4 className="footer-col-heading">Policies</h4>
           <ul className="footer-link-list">
@@ -90,7 +87,6 @@ const Footer = ({ setActivePage }) => {
           </ul>
         </div>
 
-        {/* Column 4: Contact Info */}
         <div className="footer-column">
           <h4 className="footer-col-heading">Contact Info</h4>
           <ul className="footer-contact-list">
@@ -114,10 +110,8 @@ const Footer = ({ setActivePage }) => {
             ))}
           </ul>
         </div>
-
       </div>
 
-      {/* Footer Bottom Bar */}
       <div className="footer-bottom">
         <p className="footer-copyright">
           &copy; {currentYear} Trace Robotics. All Rights Reserved.

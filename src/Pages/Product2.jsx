@@ -1,4 +1,3 @@
-import React from 'react';
 import traceLiteImage from '../../pic/Trace light.png';
 import traceSenseImage from '../../pic/trace sence.png';
 import trace360Image from '../../pic/Trace 360.png';
@@ -6,10 +5,7 @@ import traceScaraImage from '../../pic/Trace SCARA.png';
 
 const Product2 = () => {
   const highlights = [
-    { icon: 'fa-solid fa-microchip', label: 'Advanced Technology' },
-    { icon: 'fa-solid fa-shield-halved', label: 'Reliable & Secure' },
-    { icon: 'fa-solid fa-battery-full', label: 'Energy Efficient' },
-    { icon: 'fa-solid fa-cloud', label: 'Seamless Connectivity' }
+    
   ];
 
   const products = [
