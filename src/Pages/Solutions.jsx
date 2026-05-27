@@ -1,22 +1,22 @@
 const Solutions = ({ setActivePage }) => {
   const cards = [
     {
-      title: "1. Manufacturing Automation",
+      title: "Manufacturing Automation",
       desc: "End-to-end automation solutions to optimize manufacturing processes and increase output.",
       image: "/Manufacturing Automation.png"
     },
     {
-      title: "2. Intralogistics Automation",
+      title: "Intralogistics Automation",
       desc: "Smart material handling solutions for warehouses and distribution centers.",
       image: "/Intralogistics Automation.png"
     },
     {
-      title: "3. Quality Inspection",
+      title: "Quality Inspection",
       desc: "AI-powered vision inspection systems to ensure consistent quality and reduce defects.",
       image: "/Quality Inspection.png"
     },
     {
-      title: "4. Turnkey Solutions",
+      title: "Turnkey Solutions",
       desc: "From concept to deployment, we deliver complete turnkey automation solutions.",
       image: "/Turnkey Solutions.png"
     }
@@ -40,7 +40,14 @@ const Solutions = ({ setActivePage }) => {
         {cards.map((card, index) => (
           <div className="modern-card" key={index}>
             {card.image && (
-              <img src={card.image} alt={card.title} className="card-img-modern" />
+              <button
+                type="button"
+                className="card-image-link"
+                onClick={() => setActivePage('solutions')}
+                aria-label={`View ${card.title} solutions`}
+              >
+                <img src={card.image} alt={card.title} className="card-img-modern" />
+              </button>
             )}
             <h3 className="card-title-modern">{card.title}</h3>
             <div className="card-divider"></div>

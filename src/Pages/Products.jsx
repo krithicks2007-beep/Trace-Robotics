@@ -1,22 +1,22 @@
 const Products = ({ setActivePage }) => {
   const cards = [
     {
-      title: "1. Industrial Robot Arms",
+      title: "Industrial Robot Arms",
       desc: "High-precision robotic arms for welding, handling, assembling, and more.",
       image: "/Industrial Robot Arms.png"
     },
     {
-      title: "2. AMR / AGV Systems",
+      title: "AMR / AGV Systems",
       desc: "Autonomous mobile robots for material transport and smart intralogistics.",
       image: "/AMR AGV Systems.png"
     },
     {
-      title: "3. Control & Drive Systems",
+      title: "Control & Drive Systems",
       desc: "Advanced control solutions for seamless motion and process control.",
       image: "/Control and Driven System.png"
     },
     {
-      title: "4. Vision Systems",
+      title: "Vision Systems",
       desc: "Intelligent vision solutions for inspection, guidance, and quality assurance.",
       image: "/vision system.png"
     }
@@ -40,7 +40,14 @@ const Products = ({ setActivePage }) => {
         {cards.map((card, index) => (
           <div className="modern-card" key={index}>
             {card.image && (
-              <img src={card.image} alt={card.title} className="card-img-modern" />
+              <button
+                type="button"
+                className="card-image-link"
+                onClick={() => setActivePage('products')}
+                aria-label={`View ${card.title} products`}
+              >
+                <img src={card.image} alt={card.title} className="card-img-modern" />
+              </button>
             )}
             <h3 className="card-title-modern">{card.title}</h3>
             <div className="card-divider"></div>

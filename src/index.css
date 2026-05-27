@@ -938,6 +938,29 @@ body.mobile-menu-open .header-wrapper {
   margin-bottom: 20px;
 }
 
+.card-image-link {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: block;
+}
+
+.card-image-link:focus-visible {
+  outline: 3px solid rgba(0, 102, 255, 0.35);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.card-image-link .card-img-modern {
+  display: block;
+}
+
+.card-image-link:hover .card-img-modern {
+  filter: brightness(0.96);
+}
+
 .card-link-modern {
   font-size: 14px;
   font-weight: 700;
@@ -953,6 +976,20 @@ body.mobile-menu-open .header-wrapper {
 
 .card-link-modern:hover {
   gap: 12px;
+}
+
+#solutions .modern-card,
+#products .modern-card,
+#support .modern-card {
+  align-items: center;
+  text-align: center;
+}
+
+#solutions .card-title-modern,
+#products .card-title-modern,
+#support .card-title-modern {
+  width: 100%;
+  text-align: center;
 }
 
 /* Values Card Container */
@@ -1755,6 +1792,7 @@ body.mobile-menu-open .header-wrapper {
   font-weight: 800;
   letter-spacing: 0;
   margin-bottom: 6px;
+  text-align: center;
 }
 
 .product-card-tagline {
@@ -1763,6 +1801,7 @@ body.mobile-menu-open .header-wrapper {
   line-height: 1.45;
   font-weight: 700;
   margin-bottom: 16px;
+  text-align: center;
 }
 
 .product-feature-list {

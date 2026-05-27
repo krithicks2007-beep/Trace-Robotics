@@ -1,22 +1,22 @@
 const Support = ({ setActivePage }) => {
   const cards = [
     {
-      title: "1. Robot Training",
+      title: "Robot Training",
       desc: "Hands-on industrial robot programming and operation training for your team.",
       image: "/Robot Training.png"
     },
     {
-      title: "2. PLC Training",
+      title: "PLC Training",
       desc: "Practical PLC programming and automation control training for engineers.",
       image: "/PLC Training.png"
     },
     {
-      title: "3. Support & Maintenance",
+      title: "Support & Maintenance",
       desc: "Reliable ongoing support, troubleshooting and preventive maintenance services.",
       image: "/support &maintenance.png"
     },
     {
-      title: "4. Embedded System Training",
+      title: "Embedded System Training",
       desc: "Practical embedded programming and hardware interfacing training for engineers and developers.",
       image: "/Embedded system training.jpg"
     }
@@ -40,7 +40,14 @@ const Support = ({ setActivePage }) => {
         {cards.map((card, index) => (
           <div className="modern-card" key={index}>
             {card.image && (
-              <img src={card.image} alt={card.title} className="card-img-modern" />
+              <button
+                type="button"
+                className="card-image-link"
+                onClick={() => setActivePage('support')}
+                aria-label={`View ${card.title} support`}
+              >
+                <img src={card.image} alt={card.title} className="card-img-modern" />
+              </button>
             )}
             <h3 className="card-title-modern">{card.title}</h3>
             <div className="card-divider"></div>
