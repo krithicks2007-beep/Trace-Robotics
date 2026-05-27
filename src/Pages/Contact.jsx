@@ -15,11 +15,15 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`Inquiry from ${formData.name} — ${formData.interest || 'General'}`);
+    const subject = encodeURIComponent(`Inquiry from ${formData.name} - ${formData.interest || 'General'}`);
     const body = encodeURIComponent(
       `Hi Trace Robotics Team,\n\nName: ${formData.name}\nEmail: ${formData.email}\nInterested In: ${formData.interest}\n\nRequirements:\n${formData.requirements}\n\nLooking forward to hearing from you.`
     );
-    window.location.href = `mailto:info.tracerobotics@gmail.com?subject=${subject}&body=${body}`;
+    window.open(
+      `https://mail.google.com/mail/?view=cm&fs=1&to=info.tracerobotics@gmail.com&su=${subject}&body=${body}`,
+      '_blank',
+      'noopener,noreferrer'
+    );
   };
 
   const infoItems = [

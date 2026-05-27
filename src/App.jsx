@@ -5,6 +5,7 @@ import HeroSlider from './Components/HeroSlider';
 import Home from './Pages/Home';
 import Solutions from './Pages/Solutions';
 import Products from './Pages/Products';
+import Product2 from './Pages/Product2';
 import Support from './Pages/Support';
 import Contact from './Pages/Contact';
 import './App.css';
@@ -172,7 +173,7 @@ function App() {
             <HeroSlider />
           </div>
           <div id="products">
-            <Products setActivePage={handleNavClick} />
+            <Product2 setActivePage={handleNavClick} />
           </div>
         </>
       );

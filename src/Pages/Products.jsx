@@ -47,7 +47,7 @@ const Products = ({ setActivePage }) => {
             <h3 className="card-title-modern">{card.title}</h3>
             <div className="card-divider"></div>
             <p className="card-desc-modern">{card.desc}</p>
-            <div 
+            <div
               className="card-link-modern"
               onClick={() => setActivePage('contact')}
             >
